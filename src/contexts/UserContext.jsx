@@ -1,4 +1,6 @@
 import { createContext, useState } from 'react'
+import{ login, logout } from '../services/AuthService'
+import { Await } from 'react-router-dom'
 
 const UserContext = createContext({
   userId: null,
@@ -11,11 +13,18 @@ export function UserContextProvider(props) {
 
   const [currentUser, setCurrentUser] = useState({ userId: null, logado: true })
 
-  function handleLogin(email, senha) {
-    setCurrentUser({ userId: 100, logado: true })
+  async function handleLogin(email, senha) {
+    try {
+      const id = await login(email, senha)
+    setCurrentUser({ userId: id, logado: true })
+    } catch(error){
+      throw Error(error.message)
+    }
+    
   }
 
-  function handleLogout() {
+  async function handleLogout() {
+    await logout()
     setCurrentUser({ userId: null, logado: false })
   }
 
