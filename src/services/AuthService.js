@@ -1,12 +1,16 @@
-import { getAuth, signInWithEmailAndPassword, signOut} from 'firebase/auth'
+import { getAuth, signInWithEmailAndPassword, signOut, createUserWithEmailAndPassword, updateProfile} from 'firebase/auth'
 
 import { app } from '../services/FirebaseConfig'
 
 const auth = getAuth(app)
 
 export async function login(email, senha) {
-    return await signInWithEmailAndPassword(auth, email, senha)
-    .then((userCredential) => userCredential.user.uid) 
+    // return await signInWithEmailAndPassword(auth, email, senha)
+    return await createUserWithEmailAndPassword(auth, email, senha)
+    .then((userCredential) =>{
+        updateProfile(userCredential, {displayName: ""})
+    userCredential.user.uid
+    })  
     .catch((error) => {
         if(error.code == 'auth/wrong-password') {
             throw Error('Senha Inválida')

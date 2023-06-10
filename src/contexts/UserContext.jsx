@@ -1,6 +1,5 @@
 import { createContext, useState } from 'react'
 import{ login, logout } from '../services/AuthService'
-import { Await } from 'react-router-dom'
 
 const UserContext = createContext({
   userId: null,

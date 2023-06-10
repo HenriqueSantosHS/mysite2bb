@@ -27,7 +27,7 @@ export default function LoginForm(props) {
     },
     minLength: {
       value: 8,
-      message: 'Senha deve ter no mínimo 8 caracteres',
+      message: 'Mínimo 8 caracteres',
     }
   }
 
